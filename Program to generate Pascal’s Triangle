@@ -1,0 +1,39 @@
+LINK: https://leetcode.com/problems/pascals-triangle/
+
+Problem Statement: Given an integer N, return the first N rows of Pascal’s triangle.
+From:https://takeuforward.org/data-structure/program-to-generate-pascals-triangle/
+
+a matrix now where each line is basically a row in the matrix. So, first things first, if you are at the edge of the matrix,
+the value is 1, that’s for sure. Now, what about the inner elements? Well, any inner element is obtained by doing the sum of the 2 values present in the row just above it,
+i.e., if the element is at index (i, j), then matrix[i][j] can be obtained by doing matrix[i – 1][j – 1] + matrix[i – 1][j].
+
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+        
+        vector<vector<int>> v;
+        int temp=0;
+       
+        for(int row=0;row< numRows;row++){
+            v.push_back(vector<int> ());
+            for(int col=0;col<row+1;col++){
+                if(col==0){
+                    v[row].push_back(1);
+                }
+                else if(col==row){
+                    v[row].push_back(1);
+                }
+                else{
+                    temp =v[row-1][col]+v[row-1][col-1];
+                    v[row].push_back(temp);
+                }
+            }
+        }
+        return v;
+    }
+};
+
+Time complexity : O(m*n)
+space complexity : O(numRows)
+
+
