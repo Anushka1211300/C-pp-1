@@ -1,0 +1,58 @@
+Aka : Maximum Subarray Sum in an Array
+Problem Statement: Given an integer array arr, find the contiguous subarray (containing at least one number) which
+has the largest sum and return its sum and print the subarray.
+
+
+Solution 1: Naive approach O(N^3)
+ Using three for loops, we will get all possible subarrays in two loops and their sum in another loop, and then return the maximum of them.
+
+
+Approach 2:O(N^2)
+We can also do this problem using only two for loop, starting the function with ( max_sum ) variable which will have the final answer.
+We can get the sum of all possible subarrays in this way and then return the maximum so far.
+
+Approach 3: Kadane's algorithm  O(N)
+More optimized : 
+Intuition: Basically this problem can be done in linear time complexity with Kadane’s algorithm along with that will also get the subarray which is giving the largest positive-sum. 
+
+Approach: 
+class Solution {
+public:
+   
+best sum, current sum(sum) : two variables used for keeping sum
+all_negative : variable taken to check if all the numbers are negative  true or false
+    int maxSubArray(vector<int>& nums) {
+        bool all_negative=true; 
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]>0){
+                all_negative=false;
+                break;
+            }
+        }
+        if(all_negative ==true){
+            int mini =INT_MIN;
+            for(int i=0;i<nums.size();i++){
+                if(mini<nums[i]){
+                    mini=nums[i];
+                }
+               
+            }
+             return mini;
+        }
+        else{
+            int sum=0;
+            int best_sum=INT_MIN;
+            for(int i=0;i<nums.size();i++){
+                sum+=nums[i];
+                if(sum<0){
+                    sum=0;
+                }
+                if(sum > best_sum){
+                    best_sum=sum;
+                }
+                
+            }
+           return best_sum;
+        }
+    }
+};
