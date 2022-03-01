@@ -1,0 +1,69 @@
+next_permutation : find next lexicographically(alphabetically in letters  ) greater permutation
+Problem Statement: Given an array Arr[] of integers, rearrange the numbers of the given array into the lexicographically next greater permutation of numbers.
+
+If such an arrangement is not possible, it must rearrange it as the lowest possible order (i.e., sorted in ascending order).
+
+
+Solution 1 Brute Force: Finding all possible permutations. 
+
+Approach :
+
+Step 1: Find all possible permutations of elements present and store them.
+
+Step 2: Search input from all possible permutations.
+
+Step 3: Print the next permutation present right after it.
+TIME COMPLEXITY :O(N!xN).
+SPACE COMPLEXITY : O(1)
+
+
+Solution 2 : Using C++ in-built function
+
+C++ provides an in-built function called next_permutation() which directly returns the lexicographically next greater permutation of the input.
+There is AN INBUILT FUNCTION IN C++ 
+using the function the code is :
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+         
+        next_permutation(nums.begin(),nums.end());
+        
+    }
+        
+};
+
+
+Solution 3 : Algorithm:
+   1.a[i]<a[i+1]  found inx1 (k) 
+   2.a[inx2]>a[indx1] from last   indx2(l)
+   3.swap(a[indx1] ,a[indx2])
+   4.reverse(a.begin()+indx1+1, a.end())
+
+Intuition :  Notes ...
+
+Code:
+int n = nums.size(), k, l;
+    	for (k = n - 2; k >= 0; k--) {
+            if (nums[k] < nums[k + 1]) {
+                break;
+            }
+        }
+    	if (k < 0) {
+    	    reverse(nums.begin(), nums.end());
+    	} else {
+    	    for (l = n - 1; l > k; l--) {
+                if (nums[l] > nums[k]) {
+                    break;
+                }
+            } 
+    	    swap(nums[k], nums[l]);
+    	    reverse(nums.begin() + k + 1, nums.end());
+        }
+    }
+};
+Time Complexity: For the first iteration backward, the second interaction backward and reversal at the end takes O(N) for each, 
+where N is the number of elements in the input array. This sums up to 3*O(N) which is approximately O(N).
+
+Space Complexity: Since no extra storage is required. Thus, its complexity is O(1).
+
